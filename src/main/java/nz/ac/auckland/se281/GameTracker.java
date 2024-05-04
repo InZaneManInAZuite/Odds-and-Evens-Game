@@ -32,7 +32,7 @@ public class GameTracker {
     this.playerLosses = 0;
   }
 
-  public void updateGameTracker(String winner) {
+  public void updateWinTracker(String winner) {
     if (winner.equals(player)) {
       playerWins++;
     } else {
@@ -44,8 +44,6 @@ public class GameTracker {
     } else {
       lastWinner = player;
     }
-
-    round++;
   }
 
   public void updateEveness(String input) {
@@ -69,8 +67,16 @@ public class GameTracker {
     return gameStarted;
   }
 
+  public void incrementRound() {
+    round++;
+  }
+
   public int getRound() {
     return round;
+  }
+
+  public String getRoundString() {
+    return Integer.toString(round);
   }
 
   public int getEveness() {
@@ -85,8 +91,16 @@ public class GameTracker {
     return playerWins;
   }
 
+  public String getPlayerWinsString() {
+    return Integer.toString(playerWins);
+  }
+
   public int getPlayerLosses() {
     return playerLosses;
+  }
+
+  public String getPlayerLossesString() {
+    return Integer.toString(playerLosses);
   }
 
   public String getPlayer() {

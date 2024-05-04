@@ -6,56 +6,34 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
 
-  // The player's name, difficulty, and choice are stored
-  private String player;
-  private Difficulty difficulty;
-  private Choice choice;
-
-  // Tracker variables are stored
-  boolean gameStarted = false;
-  private int round = 0;
-  private int eveness = 0;
-  private String lastWinner = "";
-  private int playerWins = 0;
-  private int playerLosses = 0;
-
-  // The AI system is made
+  // The game tracker and AI system is made
+  GameTracker tracker = new GameTracker();
   private AISystem aiSystem;
   private String aiName = "HAL-9000";
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
-    // Everything is set up for the new game
-    this.difficulty = difficulty;
-    this.choice = choice;
-    round = 0;
-    eveness = 0;
-    lastWinner = "";
-    playerWins = 0;
-    playerLosses = 0;
+    // Set up everything  for the new game
+    tracker.newGameTracker(difficulty, choice, options[0]);
 
     // the first element of options[0]; is the name of the player
-    player = options[0];
-    MessageCli.WELCOME_PLAYER.printMessage(player);
+    MessageCli.WELCOME_PLAYER.printMessage(tracker.getPlayer());
 
     // Create the AI system
-    this.aiSystem = new AIFactory().createAI(this.difficulty);
-
-    // The game is started
-    gameStarted = true;
+    this.aiSystem = new AIFactory().createAI(tracker.getDifficulty());
   }
 
   public void play() {
 
     // If the game has not started, the player is informed
-    if (!gameStarted) {
+    if (!tracker.gameStarted()) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
     // The round is incremented and the player is informed
-    round++;
-    MessageCli.START_ROUND.printMessage(Integer.toString(round));
+    tracker.incrementRound();
+    MessageCli.START_ROUND.printMessage(tracker.getRoundString());
 
     // The player is asked to input the number of fingers
     MessageCli.ASK_INPUT.printMessage();
@@ -76,10 +54,12 @@ public class Game {
     }
 
     // Confirms the inputs to the player
-    MessageCli.PRINT_INFO_HAND.printMessage(player, input);
+    MessageCli.PRINT_INFO_HAND.printMessage(tracker.getPlayer(), input);
 
     // The computer's play is confirmed to the player
-    int aiFinger = aiSystem.play(eveness, round, choice, lastWinner);
+    int aiFinger =
+        aiSystem.play(
+            tracker.getEveness(), tracker.getRound(), tracker.getChoice(), tracker.getLastWinner());
 
     // The computer's play is confirmed to the player
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, Integer.toString(aiFinger));
@@ -90,40 +70,29 @@ public class Game {
     String sumDiv = "";
     if (Utils.isEven(sum)) {
       sumDiv = "EVEN";
-      if (choice == Choice.EVEN) {
-        winner = player;
+      if (tracker.getChoice() == Choice.EVEN) {
+        winner = tracker.getPlayer();
       }
     } else {
       sumDiv = "ODD";
-      if (choice == Choice.ODD) {
-        winner = player;
+      if (tracker.getChoice() == Choice.ODD) {
+        winner = tracker.getPlayer();
       }
     }
 
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), sumDiv, winner);
 
     // The eveness is updated
-    if (Utils.isEven(Integer.parseInt(input))) {
-      eveness++;
-    } else {
-      eveness--;
-    }
+    tracker.updateEveness(input);
 
-    // The last winner is updated
-    lastWinner = winner;
-
-    // The player's wins and losses are updated
-    if (winner.equals(player)) {
-      playerWins++;
-    } else {
-      playerLosses++;
-    }
+    // The game tracker is updated
+    tracker.updateWinTracker(winner);
   }
 
   public void endGame() {
 
     // If the game has not started, the player is informed
-    if (!gameStarted) {
+    if (!tracker.gameStarted()) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
@@ -132,30 +101,30 @@ public class Game {
     showStats();
 
     // The winner is printed
-    if (playerWins > playerLosses) {
-      MessageCli.PRINT_END_GAME.printMessage(player);
-    } else if (playerWins < playerLosses) {
+    if (tracker.getPlayerWins() > tracker.getPlayerLosses()) {
+      MessageCli.PRINT_END_GAME.printMessage(tracker.getPlayer());
+    } else if (tracker.getPlayerWins() < tracker.getPlayerLosses()) {
       MessageCli.PRINT_END_GAME.printMessage(aiName);
     } else {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
     }
 
     // The game is ended
-    gameStarted = false;
+    tracker.clearGameTracker();
   }
 
   public void showStats() {
 
     // If the game has not started, the player is informed
-    if (!gameStarted) {
+    if (!tracker.gameStarted()) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
     // The player's and robot's wins and losses are printed
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        player, Integer.toString(playerWins), Integer.toString(playerLosses));
+        tracker.getPlayer(), tracker.getPlayerWinsString(), tracker.getPlayerLossesString());
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        aiName, Integer.toString(playerLosses), Integer.toString(playerWins));
+        aiName, tracker.getPlayerLossesString(), tracker.getPlayerWinsString());
   }
 }
