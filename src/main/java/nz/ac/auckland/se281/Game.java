@@ -11,9 +11,10 @@ public class Game {
   private Difficulty difficulty;
   private Choice choice;
 
-  // The round and eveness are kept track of
+  // The round, eveness, and last winner are kept track of
   private int round = 0;
   private int eveness = 0;
+  private String lastWinner = "";
 
   // The AI system is made
   private AISystem aiSystem;
@@ -61,7 +62,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(player, input);
 
     // The computer's play is confirmed to the player
-    int aiFinger = aiSystem.play(eveness, round, choice);
+    int aiFinger = aiSystem.play(eveness, round, choice, lastWinner);
 
     // The computer's play is confirmed to the player
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, Integer.toString(aiFinger));
@@ -90,6 +91,9 @@ public class Game {
     } else {
       eveness--;
     }
+
+    // The last winner is updated
+    lastWinner = winner;
   }
 
   public void endGame() {}
