@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-/** This class a hard mind system for the robot enemy of a player */
+/** This class a hard mind system for the robot enemy of a player. */
 public class HardMind implements MindSystem {
 
   private Strategy stratRand = new RandomStrategy();
@@ -8,7 +8,7 @@ public class HardMind implements MindSystem {
   private Strategy strategy = stratRand;
 
   /**
-   * This method is used to set the strategy of the mind system
+   * This method is used to set the strategy of the mind system.
    *
    * @param strategy the strategy to be set
    */
@@ -16,7 +16,7 @@ public class HardMind implements MindSystem {
     this.strategy = strategy;
   }
 
-  /** This method is used to switch the strategy of the mind system */
+  /** This method is used to switch the strategy of the mind system. */
   private void switchStrategy() {
     if (strategy == stratRand) {
       setStrategy(stratSmart);
@@ -26,7 +26,7 @@ public class HardMind implements MindSystem {
   }
 
   /**
-   * This method is used to produce an action for the robot enemy of a player
+   * This method is used to produce an action for the robot enemy of a player.
    *
    * @param tracker contains all the information tracked by the game
    * @return the action produced by the mind system

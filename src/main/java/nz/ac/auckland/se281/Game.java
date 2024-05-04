@@ -13,7 +13,7 @@ public class Game {
 
   /**
    * This method initiates a game with the given difficulty (easy, medium, or hard), choice (odd or
-   * even) and options (player name)
+   * even) and options (player name).
    *
    * @param difficulty the difficulty of the game
    * @param choice for either odd or even
@@ -31,7 +31,7 @@ public class Game {
     this.aiSystem = new MindFactory().createMind(tracker.getDifficulty());
   }
 
-  /** This method is used to play a round of the game */
+  /** This method is used to play a round of the game. */
   public void play() {
 
     // If the game has not started, the player is informed
@@ -96,7 +96,7 @@ public class Game {
     tracker.updateWinTracker(winner);
   }
 
-  /** This method is used to end the game */
+  /** This method is used to end the game. */
   public void endGame() {
 
     // If the game has not started, the player is informed
@@ -119,7 +119,7 @@ public class Game {
     tracker.clearGameTracker();
   }
 
-  /** This method is used to show the statistics of the game */
+  /** This method is used to show the statistics of the game. */
   public void showStats() {
 
     // If the game has not started, the player is informed

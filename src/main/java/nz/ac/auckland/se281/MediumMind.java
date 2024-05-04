@@ -11,7 +11,7 @@ public class MediumMind implements MindSystem {
   private Strategy strategy = new RandomStrategy();
 
   /**
-   * This method is used to set the strategy of the mind system
+   * This method is used to set the strategy of the mind system.
    *
    * @param strategy the strategy to be set
    */
@@ -20,7 +20,7 @@ public class MediumMind implements MindSystem {
   }
 
   /**
-   * This method is used to produce an action for the robot enemy of a player
+   * This method is used to produce an action for the robot enemy of a player.
    *
    * @param tracker contains all the information tracked by the game
    * @return the action produced by the mind system
