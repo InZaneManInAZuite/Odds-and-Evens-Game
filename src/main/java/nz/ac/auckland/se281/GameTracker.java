@@ -16,9 +16,18 @@ public class GameTracker {
   private int playerWins = 0;
   private int playerLosses = 0;
 
+  // Constructor for the game tracker
   public GameTracker() {}
 
   // Methods to update the game tracker
+
+  /**
+   * Update the game tracker with its start values and new game values
+   *
+   * @param difficulty the difficulty of the game
+   * @param choice for even or odd
+   * @param player the player's name
+   */
   public void newGameTracker(Difficulty difficulty, Choice choice, String player) {
     this.difficulty = difficulty;
     this.choice = choice;
@@ -33,6 +42,11 @@ public class GameTracker {
     this.playerLosses = 0;
   }
 
+  /**
+   * Update the win tracker with the winner of the game and store win/lost counts
+   *
+   * @param winner the winner of the game
+   */
   public void updateWinTracker(String winner) {
     if (winner.equals(player)) {
       playerWins++;
@@ -47,6 +61,11 @@ public class GameTracker {
     }
   }
 
+  /**
+   * Update the eveness tracker with the player's input
+   *
+   * @param input the player's input
+   */
   public void updateEveness(String input) {
     if (Utils.isEven(Integer.parseInt(input))) {
       eveness++;
@@ -55,6 +74,7 @@ public class GameTracker {
     }
   }
 
+  /** Clear the game tracker to its default values */
   public void clearGameTracker() {
     this.gameStarted = false;
     this.round = 0;
@@ -64,6 +84,7 @@ public class GameTracker {
     this.playerLosses = 0;
   }
 
+  /** Increment the round of the game tracker */
   public void incrementRound() {
     round++;
   }

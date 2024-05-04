@@ -11,6 +11,14 @@ public class Game {
   private MindSystem aiSystem;
   private String aiName = "HAL-9000";
 
+  /**
+   * This method initiates a game with the given difficulty (easy, medium, or hard), choice (odd or
+   * even) and options (player name)
+   *
+   * @param difficulty the difficulty of the game
+   * @param choice for either odd or even
+   * @param options the name of the player
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
     // Set up everything  for the new game
@@ -23,6 +31,7 @@ public class Game {
     this.aiSystem = new MindFactory().createMind(tracker.getDifficulty());
   }
 
+  /** This method is used to play a round of the game */
   public void play() {
 
     // If the game has not started, the player is informed
@@ -65,7 +74,7 @@ public class Game {
     // The outcome of the round is determined
     int sum = Integer.parseInt(input) + aiFinger;
     String winner = aiName;
-    String sumDiv = "";
+    String sumDiv;
     if (Utils.isEven(sum)) {
       sumDiv = "EVEN";
       if (tracker.getChoice() == Choice.EVEN) {
@@ -87,6 +96,7 @@ public class Game {
     tracker.updateWinTracker(winner);
   }
 
+  /** This method is used to end the game */
   public void endGame() {
 
     // If the game has not started, the player is informed
@@ -109,6 +119,7 @@ public class Game {
     tracker.clearGameTracker();
   }
 
+  /** This method is used to show the statistics of the game */
   public void showStats() {
 
     // If the game has not started, the player is informed

@@ -2,8 +2,15 @@ package nz.ac.auckland.se281;
 
 import nz.ac.auckland.se281.Main.Difficulty;
 
+/** This class is used to create a mind system based on the difficulty */
 public class MindFactory {
 
+  /**
+   * This method is used to create a mind system based on the difficulty
+   *
+   * @param difficulty the difficulty of the mind system
+   * @return the mind system
+   */
   public MindSystem createMind(Difficulty difficulty) {
 
     // Create a mind system based on the difficulty
