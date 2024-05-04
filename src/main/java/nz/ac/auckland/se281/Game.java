@@ -111,6 +111,13 @@ public class Game {
 
     // The last winner is updated
     lastWinner = winner;
+
+    // The player's wins and losses are updated
+    if (winner.equals(player)) {
+      playerWins++;
+    } else {
+      playerLosses++;
+    }
   }
 
   public void endGame() {
