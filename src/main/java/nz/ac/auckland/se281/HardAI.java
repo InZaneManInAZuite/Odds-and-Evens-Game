@@ -1,7 +1,5 @@
 package nz.ac.auckland.se281;
 
-import nz.ac.auckland.se281.Main.Choice;
-
 public class HardAI implements AISystem {
 
   Strategy stratRand = new RandomStrategy();
@@ -21,12 +19,12 @@ public class HardAI implements AISystem {
   }
 
   @Override
-  public int play(int eveness, int round, Choice choice, String lastWinner) {
-    if (round <= 3) {
+  public int play(GameTracker tracker) {
+    if (tracker.getRound() <= 3) {
       setStrategy(stratRand);
-    } else if (!lastWinner.equals("HAL-9000")) {
+    } else if (!tracker.getLastWinner().equals("HAL-9000")) {
       switchStrategy();
     }
-    return strategy.play(eveness, choice);
+    return strategy.play(tracker.getEveness(), tracker.getChoice());
   }
 }

@@ -57,9 +57,7 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(tracker.getPlayer(), input);
 
     // The computer's play is confirmed to the player
-    int aiFinger =
-        aiSystem.play(
-            tracker.getEveness(), tracker.getRound(), tracker.getChoice(), tracker.getLastWinner());
+    int aiFinger = aiSystem.play(tracker);
 
     // The computer's play is confirmed to the player
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, Integer.toString(aiFinger));
