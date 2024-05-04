@@ -30,7 +30,7 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(player);
 
     // Create the AI system
-    this.aiSystem = new AIFactory().createAI(difficulty);
+    this.aiSystem = new AIFactory().createAI(this.difficulty);
   }
 
   public void play() {
@@ -60,15 +60,8 @@ public class Game {
     // Confirms the inputs to the player
     MessageCli.PRINT_INFO_HAND.printMessage(player, input);
 
-    // The eveness is updated
-    if (Utils.isEven(Integer.parseInt(input))) {
-      eveness++;
-    } else {
-      eveness--;
-    }
-
     // The computer's play is confirmed to the player
-    int aiFinger = aiSystem.play(eveness, round);
+    int aiFinger = aiSystem.play(eveness, round, choice);
 
     // The computer's play is confirmed to the player
     MessageCli.PRINT_INFO_HAND.printMessage(aiName, Integer.toString(aiFinger));
@@ -90,6 +83,13 @@ public class Game {
     }
 
     MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), sumDiv, winner);
+
+    // The eveness is updated
+    if (Utils.isEven(Integer.parseInt(input))) {
+      eveness++;
+    } else {
+      eveness--;
+    }
   }
 
   public void endGame() {}
