@@ -11,10 +11,13 @@ public class Game {
   private Difficulty difficulty;
   private Choice choice;
 
-  // The round, eveness, and last winner are kept track of
+  // Tracker variables are stored
+  boolean gameStarted = false;
   private int round = 0;
   private int eveness = 0;
   private String lastWinner = "";
+  private int playerWins = 0;
+  private int playerLosses = 0;
 
   // The AI system is made
   private AISystem aiSystem;
@@ -22,9 +25,14 @@ public class Game {
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
-    // The difficulty and choice (Odd or Even) are set for this new game
+    // Everything is set up for the new game
     this.difficulty = difficulty;
     this.choice = choice;
+    round = 0;
+    eveness = 0;
+    lastWinner = "";
+    playerWins = 0;
+    playerLosses = 0;
 
     // the first element of options[0]; is the name of the player
     player = options[0];
@@ -32,9 +40,18 @@ public class Game {
 
     // Create the AI system
     this.aiSystem = new AIFactory().createAI(this.difficulty);
+
+    // The game is started
+    gameStarted = true;
   }
 
   public void play() {
+
+    // If the game has not started, the player is informed
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
 
     // The round is incremented and the player is informed
     round++;
@@ -96,7 +113,42 @@ public class Game {
     lastWinner = winner;
   }
 
-  public void endGame() {}
+  public void endGame() {
 
-  public void showStats() {}
+    // If the game has not started, the player is informed
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    // Show stats
+    showStats();
+
+    // The winner is printed
+    if (playerWins > playerLosses) {
+      MessageCli.PRINT_END_GAME.printMessage(player);
+    } else if (playerWins < playerLosses) {
+      MessageCli.PRINT_END_GAME.printMessage(aiName);
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    }
+
+    // The game is ended
+    gameStarted = false;
+  }
+
+  public void showStats() {
+
+    // If the game has not started, the player is informed
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+    // The player's and robot's wins and losses are printed
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        player, Integer.toString(playerWins), Integer.toString(playerLosses));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        aiName, Integer.toString(playerLosses), Integer.toString(playerWins));
+  }
 }
