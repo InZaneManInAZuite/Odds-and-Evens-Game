@@ -17,6 +17,6 @@ public class MediumAI implements AISystem {
     } else {
       setStrategy(stratSmart);
     }
-    return strategy.play(tracker.getEveness(), tracker.getChoice());
+    return strategy.play(tracker);
   }
 }

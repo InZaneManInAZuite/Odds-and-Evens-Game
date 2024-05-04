@@ -25,6 +25,6 @@ public class HardAI implements AISystem {
     } else if (!tracker.getLastWinner().equals("HAL-9000")) {
       switchStrategy();
     }
-    return strategy.play(tracker.getEveness(), tracker.getChoice());
+    return strategy.play(tracker);
   }
 }

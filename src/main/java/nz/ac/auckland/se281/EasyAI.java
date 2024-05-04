@@ -6,6 +6,6 @@ public class EasyAI implements AISystem {
 
   @Override
   public int play(GameTracker tracker) {
-    return strategy.play(tracker.getEveness(), tracker.getChoice());
+    return strategy.play(tracker);
   }
 }
