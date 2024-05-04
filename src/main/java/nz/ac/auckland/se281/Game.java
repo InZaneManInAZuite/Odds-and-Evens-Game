@@ -6,12 +6,18 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
 
-  private int round = 0;
+  // The player's name, difficulty, and choice are stored
   private String player;
   private Difficulty difficulty;
   private Choice choice;
+
+  // The round and eveness are kept track of
+  private int round = 0;
   private int eveness = 0;
+
+  // The AI system is made
   private AISystem aiSystem;
+  private String aiName = "HAL-9000";
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
 
@@ -65,7 +71,25 @@ public class Game {
     int aiFinger = aiSystem.play(eveness, round);
 
     // The computer's play is confirmed to the player
-    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", Integer.toString(aiFinger));
+    MessageCli.PRINT_INFO_HAND.printMessage(aiName, Integer.toString(aiFinger));
+
+    // The outcome of the round is determined
+    int sum = Integer.parseInt(input) + aiFinger;
+    String winner = aiName;
+    String sumDiv = "";
+    if (Utils.isEven(sum)) {
+      sumDiv = "EVEN";
+      if (choice == Choice.EVEN) {
+        winner = player;
+      }
+    } else {
+      sumDiv = "ODD";
+      if (choice == Choice.ODD) {
+        winner = player;
+      }
+    }
+
+    MessageCli.PRINT_OUTCOME_ROUND.printMessage(Integer.toString(sum), sumDiv, winner);
   }
 
   public void endGame() {}
