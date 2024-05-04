@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class EasyAI implements AISystem {
+public class EasyMind implements MindSystem {
 
   private Strategy strategy = new RandomStrategy();
 

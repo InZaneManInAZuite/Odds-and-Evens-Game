@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-public class HardAI implements AISystem {
+public class HardMind implements MindSystem {
 
-  Strategy stratRand = new RandomStrategy();
-  Strategy stratSmart = new SmartStrategy();
-  Strategy strategy = stratRand;
+  private Strategy stratRand = new RandomStrategy();
+  private Strategy stratSmart = new SmartStrategy();
+  private Strategy strategy = stratRand;
 
   private void setStrategy(Strategy strategy) {
     this.strategy = strategy;

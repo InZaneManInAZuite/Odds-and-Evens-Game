@@ -5,10 +5,10 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class GameTracker {
 
+  // Attributes to be tracked in game
   private String player;
   private Difficulty difficulty;
   private Choice choice;
-
   private boolean gameStarted = false;
   private int round = 0;
   private int eveness = 0;
@@ -18,6 +18,7 @@ public class GameTracker {
 
   public GameTracker() {}
 
+  // Methods to update the game tracker
   public void newGameTracker(Difficulty difficulty, Choice choice, String player) {
     this.difficulty = difficulty;
     this.choice = choice;
@@ -63,20 +64,17 @@ public class GameTracker {
     this.playerLosses = 0;
   }
 
-  public boolean gameStarted() {
-    return gameStarted;
-  }
-
   public void incrementRound() {
     round++;
   }
 
+  // Getters for the game tracker
   public int getRound() {
     return round;
   }
 
-  public String getRoundString() {
-    return Integer.toString(round);
+  public boolean gameStarted() {
+    return gameStarted;
   }
 
   public int getEveness() {
@@ -91,16 +89,8 @@ public class GameTracker {
     return playerWins;
   }
 
-  public String getPlayerWinsString() {
-    return Integer.toString(playerWins);
-  }
-
   public int getPlayerLosses() {
     return playerLosses;
-  }
-
-  public String getPlayerLossesString() {
-    return Integer.toString(playerLosses);
   }
 
   public String getPlayer() {
@@ -113,5 +103,18 @@ public class GameTracker {
 
   public Choice getChoice() {
     return choice;
+  }
+
+  // Get alternative versions of game tracker getters
+  public String getRoundString() {
+    return Integer.toString(round);
+  }
+
+  public String getPlayerWinsString() {
+    return Integer.toString(playerWins);
+  }
+
+  public String getPlayerLossesString() {
+    return Integer.toString(playerLosses);
   }
 }

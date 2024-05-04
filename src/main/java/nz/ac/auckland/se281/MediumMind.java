@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-public class MediumAI implements AISystem {
+public class MediumMind implements MindSystem {
 
-  Strategy stratRand = new RandomStrategy();
-  Strategy stratSmart = new SmartStrategy();
-  Strategy strategy = new RandomStrategy();
+  private Strategy stratRand = new RandomStrategy();
+  private Strategy stratSmart = new SmartStrategy();
+  private Strategy strategy = new RandomStrategy();
 
   private void setStrategy(Strategy strategy) {
     this.strategy = strategy;

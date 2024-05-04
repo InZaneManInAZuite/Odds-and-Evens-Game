@@ -7,8 +7,8 @@ import nz.ac.auckland.se281.Main.Difficulty;
 public class Game {
 
   // The game tracker and AI system is made
-  GameTracker tracker = new GameTracker();
-  private AISystem aiSystem;
+  private GameTracker tracker = new GameTracker();
+  private MindSystem aiSystem;
   private String aiName = "HAL-9000";
 
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
@@ -20,7 +20,7 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(tracker.getPlayer());
 
     // Create the AI system
-    this.aiSystem = new AIFactory().createAI(tracker.getDifficulty());
+    this.aiSystem = new MindFactory().createMind(tracker.getDifficulty());
   }
 
   public void play() {
@@ -95,10 +95,8 @@ public class Game {
       return;
     }
 
-    // Show stats
-    showStats();
-
     // The winner is printed
+    showStats();
     if (tracker.getPlayerWins() > tracker.getPlayerLosses()) {
       MessageCli.PRINT_END_GAME.printMessage(tracker.getPlayer());
     } else if (tracker.getPlayerWins() < tracker.getPlayerLosses()) {
