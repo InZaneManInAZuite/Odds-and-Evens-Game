@@ -7,12 +7,17 @@ public class MediumAI implements AISystem {
   Strategy strategy;
 
   @Override
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
+  }
+
+  @Override
   public int play(int eveness, int round, Choice choice) {
     if (round <= 3) {
-      strategy = new RandomStrategy();
+      setStrategy(new RandomStrategy());
       return strategy.play(eveness, choice);
     } else {
-      strategy = new SmartStrategy();
+      setStrategy(new SmartStrategy());
       return strategy.play(eveness, choice);
     }
   }
