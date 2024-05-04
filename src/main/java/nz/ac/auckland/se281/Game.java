@@ -16,6 +16,22 @@ public class Game {
   public void play() {
     round++;
     MessageCli.START_ROUND.printMessage(Integer.toString(round));
+
+    // The player is asked to input the number of fingers
+    boolean inputIsValid = false;
+    while (!inputIsValid) {
+      MessageCli.ASK_INPUT.printMessage();
+      // The player inputs the number of fingers
+      String input = Utils.scanner.nextLine();
+      // The input is validated
+      if (input.matches("[0-5]")) {
+        inputIsValid = true;
+      } else {
+        MessageCli.INVALID_INPUT.printMessage();
+      }
+      // If the input is invalid, the player is asked to input again
+      // If the input is valid, the game continues
+    }
   }
 
   public void endGame() {}
