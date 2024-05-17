@@ -11,7 +11,7 @@ public class MindFactory {
    * @param difficulty the difficulty of the mind system
    * @return the mind system
    */
-  public MindSystem createMind(Difficulty difficulty) {
+  public static MindSystem createMind(Difficulty difficulty) {
 
     // Create a mind system based on the difficulty
     switch (difficulty) {

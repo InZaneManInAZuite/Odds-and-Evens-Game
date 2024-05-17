@@ -28,7 +28,7 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(tracker.getPlayer());
 
     // Create the AI system
-    this.aiSystem = new MindFactory().createMind(tracker.getDifficulty());
+    this.aiSystem = MindFactory.createMind(difficulty);
   }
 
   /** This method is used to play a round of the game. */
